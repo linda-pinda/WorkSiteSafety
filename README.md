@@ -58,7 +58,7 @@ python im2rec.py --list --recursive --train-ratio 0.95 dataset images
 
 Note: If you want to check how many images are in your dataset, use one of the following commands:<br/>
 Linux/MAC: wc -l dataset\_train.lst<br>
-Windows: findstr "." dataset\_train.lst | find /c/v ""<br>
+Windows: findstr "." dataset\_train.lst | find /c /v ""<br>
 
 Once complete, run the following command to create the recordio files which will be used as input for training our model:<br/>
 python im2rec.py --resize 224 dataset images
