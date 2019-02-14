@@ -36,10 +36,16 @@ def resize_crop(im, desired_shp_x, desired_shp_y):
 		# This will crop the function.
 		im3 = im2[0:int(desired_shp_y), 0:int(desired_shp_x)]
 	else:
-		newx, newy = x * desired_shp_y / y, desired_shp_y
+		newx, newy = float(x) * float(desired_shp_y) / float(y), desired_shp_y
 		newshape = (int(newx), int(newy))
+		im2 = cv2.resize(im, newshape)
 		midpoint = newx/2.0
-		im3 = im2.crop((midpoint - desired_shp_x/2.0, 0, midpoint + desired_shp_x/2.0, desired_shp_y))
+		xmin = int(float(midpoint) - float(desired_shp_x)/2.0)
+		xmax = int(float(midpoint) + float(desired_shp_x)/2.0)
+		ymin = 0
+		ymax = int(desired_shp_y)
+		im3 = im2[ymin:ymax, xmin:xmax]
+		#im3 = im2.crop((midpoint - desired_shp_x/2.0, 0, midpoint + desired_shp_x/2.0, desired_shp_y))
 	return im3
 
 # The main function takes in the arguments for the image directory,
@@ -66,7 +72,7 @@ def main(argv):
 	# and finally saved in a new directory called 'resized'.
 	sub_dirs=listdir_nohidden(image_dir)
 	for sub_dir in sub_dirs:
-		if not sub_dir.endswith("jpg"):
+		if not sub_dir.endswith("jpg") and not sub_dir.endswith("JPG") and not sub_dir.endswith("png") and not sub_dir.endswith("jfiff") and not sub_dir.endswith("jpeg"):
 			sub_dir_path=os.path.join(image_dir,sub_dir)
 		else:
 			sub_dir_path=image_dir
