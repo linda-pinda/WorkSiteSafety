@@ -16,6 +16,7 @@ from PIL import Image
 import os
 import cv2
 import sys, getopt
+import re
 
 
 def listdir_nohidden(path):
@@ -72,7 +73,9 @@ def main(argv):
 	# and finally saved in a new directory called 'resized'.
 	sub_dirs=listdir_nohidden(image_dir)
 	for sub_dir in sub_dirs:
-		if not sub_dir.endswith("jpg") and not sub_dir.endswith("JPG") and not sub_dir.endswith("png") and not sub_dir.endswith("jfiff") and not sub_dir.endswith("jpeg"):
+		dir_name = sub_dir
+		dir_match = re.search(r".+\.\w+", dir_name)
+		if dir_match is None:
 			sub_dir_path=os.path.join(image_dir,sub_dir)
 		else:
 			sub_dir_path=image_dir
