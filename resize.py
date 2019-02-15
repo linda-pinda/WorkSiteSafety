@@ -46,7 +46,6 @@ def resize_crop(im, desired_shp_x, desired_shp_y):
 		ymin = 0
 		ymax = int(desired_shp_y)
 		im3 = im2[ymin:ymax, xmin:xmax]
-		#im3 = im2.crop((midpoint - desired_shp_x/2.0, 0, midpoint + desired_shp_x/2.0, desired_shp_y))
 	return im3
 
 # The main function takes in the arguments for the image directory,
